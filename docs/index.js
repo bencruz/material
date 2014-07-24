@@ -7,8 +7,7 @@ var packagePath = __dirname;
 
 module.exports = function(config) {
 
-  require('dgeni-packages/base')(config);
-  require('dgeni-packages/nunjucks')(config);
+  require('dgeni-packages/ngdoc')(config);
 
   config.merge('rendering.nunjucks.config.tags', {
     variableStart: '{$',
@@ -18,25 +17,22 @@ module.exports = function(config) {
   });
 
   config.set('rendering.outputFolder', path.join(projectPath, buildConfig.docsDist));
-  config.set('rendering.templateFolders', [
+  config.set('rendering.contentsFolder', path.join(config.rendering.outputFolder, 'generated'));
+
+  config.append('rendering.templateFolders', [
     path.resolve(packagePath, 'templates')
-  ]);
-  config.set('rendering.templatePatterns', [
-    '${ doc.template }'
   ]);
 
   config.set('processing.componentsGenerate', {
-    outputFolder: 'components/${component.id}',
-    demoOutputFolder: 'components/${component.id}/${demo.id}'
+    outputFolder: 'generated/api/${component.id}',
+    demoOutputFolder: 'generated/api/${component.id}/${demo.id}'
   });
 
   config.set('basePath', projectPath);
   config.set('logging.level', 'info');
 
   config.set('source.fileReaders', [
-    require('./file-readers/json'),
-    // require('dgeni-packages/jsdoc/file-readers/jsdoc'),
-    // require('./file-readers/any')
+    require('./file-readers/json')
   ]);
   config.set('source.projectPath', projectPath);
   config.set('source.repository', buildConfig.repository);
@@ -49,7 +45,9 @@ module.exports = function(config) {
   });
 
   config.append('processing.processors', [
-    require('./processors/components-generate')
+    require('./processors/components-generate'),
+    require('./processors/jsdoc'),
+    require('./processors/components-output')
   ]);
 
   return config;

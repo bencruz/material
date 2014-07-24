@@ -30,15 +30,13 @@
   </material-sidenav>
   <div class="sidenav-content">
     <material-toolbar class="material-theme-dark">
-      <div class="material-toolbar-tools">
+      <div class="material-toolbar-tools" layout="horizontal">
         <div class="menu-icon" ng-click="toggleMenu()">
           <material-icon icon="img/icons/ic_menu_24px.svg">
           </material-icon>
         </div>
         <span ng-bind="currentComponent.name" style="margin-left: 9px"></span>
-        <div class="material-display-flex material-flex">
-          <!-- use up the third space so the button is on the right -->
-        </div>
+        <div flex></div>
         <button class="material-button view-source-button" ng-show="currentComponent.showViewSource" ng-click="viewSource(currentComponent, $event)">
           View Source
         </button>

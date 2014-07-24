@@ -1,3 +1,10 @@
+/**
+ * @ngdoc module
+ * @name material.components.tabs
+ * @description
+ *
+ * Tabs
+ */
 angular.module('material.components.tabs', ['material.utils', 'material.animations', 'material.services'])
   .controller('materialTabsController', [ '$iterator', '$scope', TabsController])
   .directive('materialTabs', [ '$compile', 'materialEffects', TabsDirective ])
@@ -292,18 +299,6 @@ function TabsDirective($compile, materialEffects) {
  * @module material.components.tabs
  *
  * @restrict E
- *
- * @param {string=} onSelect A function expression to call when the tab is selected.
- * @param {string=} onDeselect A function expression to call when the tab is deselected.
- * @param {boolean=} active A binding, telling whether or not this tab is selected.
- * @param {boolean=} disabled A binding, telling whether or not this tab is disabled.
- * @param {string=} title The visible heading, or title, of the tab. Set HTML headings with {@link ui.bootstrap.tabs.directive:tabHeading tabHeading}.
- *
- * @description
- * Creates a tab with a heading and (optional) content. Must be placed within a {@link material.components.tabs.directive:materialTabs materialTabs}.
- *
- * @example
- *
  */
 function TabDirective($attrBind, $compile, $timeout) {
   var noop = angular.noop;
@@ -316,7 +311,7 @@ function TabDirective($attrBind, $compile, $timeout) {
     scope: true,
     link: linkTab,
     template:
-      '<material-ripple initial-opacity="0.95" opacity-decay-velocity="0.89"> </material-ripple> ' +
+     '<material-ripple initial-opacity="0.95" opacity-decay-velocity="0.89"> </material-ripple> ' +
       '<material-tab-label ' +
         'ng-class="{ disabled : disabled, active : active }"  >' +
       '</material-tab-label>'
@@ -444,12 +439,9 @@ function TabDirective($attrBind, $compile, $timeout) {
 }
 
 /**
- * @ngdoc controller
+ * @ngdoc object
  * @name materialTabsController
  * @module material.components.tabs
- *
- * @private
- *
  */
 function TabsController($scope, $iterator, $attrs, $materialComponentRegistry, $timeout) {
   var list = $iterator([], true),

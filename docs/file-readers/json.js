@@ -20,7 +20,7 @@ module.exports = {
       demos: {}
     }, json);
 
-    var sources = _([].concat(json.js, json.scss, json.readme))
+    var sources = _(json.js)
       .map(getFilenamesForGlob)
       .flatten()
       .map(fileToDoc)
